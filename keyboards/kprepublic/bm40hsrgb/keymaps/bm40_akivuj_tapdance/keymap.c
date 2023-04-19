@@ -1,0 +1,137 @@
+/* Copyright 2020 tominabox1
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include QMK_KEYBOARD_H
+
+enum layers {
+  _0_BASE,
+  _1_JUEGO,
+  _2_QWERTY_FLECHAS,
+  _3_NUMEROS_SIMBOLOS,
+  _4_FUNCIONES_COPIAR_PEGAR_MEDIA,
+  _5_NUMPAD,
+  _6_NUMPAD_UNA_MANO,
+  _7_MOVIMIENTO,
+  _8_AJUSTES
+};
+
+// Tap Dance declarations
+enum {
+    _1,
+    _2,
+    _3,
+    _4,
+    _5,
+    _6,
+    _7,
+    _8,
+    _9,
+    _0,
+    GRV,
+    BSLS,
+    SLSH,
+    MINS,
+    EQL,
+    LBRC,
+    RBRC
+};
+
+// Tap Dance definitions
+tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [_1] = ACTION_TAP_DANCE_DOUBLE(KC_1, LSFT(KC_1)),
+    [_2] = ACTION_TAP_DANCE_DOUBLE(KC_2, LSFT(KC_2)),
+    [_3] = ACTION_TAP_DANCE_DOUBLE(KC_3, LSFT(KC_3)),
+    [_4] = ACTION_TAP_DANCE_DOUBLE(KC_4, LSFT(KC_4)),
+    [_5] = ACTION_TAP_DANCE_DOUBLE(KC_5, LSFT(KC_5)),
+    [_6] = ACTION_TAP_DANCE_DOUBLE(KC_6, RSFT(KC_6)),
+    [_7] = ACTION_TAP_DANCE_DOUBLE(KC_7, RSFT(KC_7)),
+    [_8] = ACTION_TAP_DANCE_DOUBLE(KC_8, RSFT(KC_8)),
+    [_9] = ACTION_TAP_DANCE_DOUBLE(KC_9, RSFT(KC_9)),
+    [_0] = ACTION_TAP_DANCE_DOUBLE(KC_0, RSFT(KC_0)),
+    [GRV] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, LSFT(KC_GRV)),
+    [BSLS] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, LSFT(KC_BSLS)),
+    [SLSH] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, LSFT(KC_SLSH)),
+    [MINS] = ACTION_TAP_DANCE_DOUBLE(KC_MINS, RSFT(KC_MINS)),
+    [EQL] = ACTION_TAP_DANCE_DOUBLE(KC_EQL, RSFT(KC_EQL)),
+    [LBRC] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, RSFT(KC_LBRC)),
+    [RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, RSFT(KC_RBRC)),
+};
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+    [_0_BASE] = LAYOUT_planck_mit(
+      KC_ESC, KC_QUOT, KC_COMM, KC_DOT, KC_P, KC_Y, KC_F, KC_G, KC_C, KC_R, KC_L, KC_BSPC,
+      KC_TAB, LGUI_T(KC_A), LALT_T(KC_O), LCTL_T(KC_E), LSFT_T(KC_U), KC_I, KC_D, RSFT_T(KC_H), RCTL_T(KC_T), LALT_T(KC_N), RGUI_T(KC_S), KC_ENT,
+      KC_CAPS, RALT_T(KC_SCLN), KC_Q, KC_J, KC_K, KC_X, KC_B, KC_M, KC_W, KC_V, RALT_T(KC_Z), KC_DEL,
+      RGB_TOG, TT(1), TT(2), MO(5), MO(4), LT(3,KC_SPC), LT(7,KC_SPC), LT(6,KC_LEFT), KC_DOWN, KC_UP, KC_RGHT
+      ),
+
+    [_1_JUEGO] = LAYOUT_planck_mit(
+      KC_TRNS, KC_QUOT, KC_COMM, KC_DOT, KC_P, KC_Y, KC_F, KC_G, KC_C, KC_R, KC_L, KC_TRNS,
+      KC_TRNS, KC_A, KC_O, KC_E, KC_U, KC_I, KC_D, KC_H, KC_T, KC_N, KC_S, KC_TRNS,
+      KC_TRNS, KC_SCLN, KC_Q, KC_J, KC_K, KC_X, KC_B, KC_M, KC_W, KC_V, KC_Z, KC_TRNS,
+      KC_TRNS, DF(0), KC_TRNS, KC_LSFT, KC_LALT, KC_SPC, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      ),
+
+    [_2_QWERTY_FLECHAS] = LAYOUT_planck_mit(
+      KC_TRNS, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_UP, KC_P, KC_TRNS,
+      KC_TRNS, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS,
+      KC_TRNS, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_TRNS,
+      KC_TRNS, KC_TRNS, DF(0), KC_LSFT, KC_LALT, KC_SPC, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      ),
+
+    [_3_NUMEROS_SIMBOLOS] = LAYOUT_planck_mit(
+      KC_TRNS, TD(_1), TD(_2), TD(_3), TD(_4), TD(_5), TD(_6), TD(_7), TD(_8), TD(_9), TD(_0), KC_TRNS,
+      KC_TRNS, LGUI_T(KC_QUOT), LALT_T(KC_COMM), LCTL_T(KC_DOT), KC_TRNS, KC_TRNS, KC_TRNS, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_TRNS,
+      KC_TRNS, KC_TRNS, TD(GRV), TD(BSLS), TD(SLSH), KC_TRNS, KC_TRNS, TD(MINS), TD(EQL), TD(LBRC), TD(RBRC), KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      ),
+
+    [_4_FUNCIONES_COPIAR_PEGAR_MEDIA] = LAYOUT_planck_mit(
+      KC_TRNS, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_TRNS, KC_TRNS, KC_F9, KC_F10, KC_F11, KC_F12, KC_TRNS,
+      KC_TRNS, LGUI_T(KC_MPLY), LALT_T(KC_MUTE), LCTL_T(KC_VOLD), LSFT_T(KC_VOLU), KC_TRNS, KC_TRNS, KC_F5, KC_F6, KC_F7, KC_F8, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, RCS(KC_C), RCS(KC_V), KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LT(8, KC_SPC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      ),
+
+    [_5_NUMPAD] = LAYOUT_planck_mit(
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_7, KC_8, KC_9, KC_SLSH, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_4, KC_5, KC_6, RSFT(KC_8), KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_0, KC_1, KC_2, KC_3, KC_MINS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_COMM, KC_DOT, RSFT(KC_EQL), KC_EQL
+      ),
+
+    [_6_NUMPAD_UNA_MANO] = LAYOUT_planck_mit(
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_7, KC_8, KC_9, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_4, KC_5, KC_6, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_0, KC_1, KC_2, KC_3, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      ),
+
+    [_7_MOVIMIENTO] = LAYOUT_planck_mit(
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_TRNS, KC_TRNS, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MO(8), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      ),
+
+    [_8_AJUSTES] = LAYOUT_planck_mit(
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_RMOD, RGB_VAI, RGB_MOD, RGB_SAI, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_PSCR, KC_BRID, KC_BRIU, KC_TRNS, KC_TRNS, RGB_SPD, RGB_VAD, RGB_SPI, RGB_SAD, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_HUD, KC_TRNS, RGB_HUI, QK_BOOT, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      )
+  };
